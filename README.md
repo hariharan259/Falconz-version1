@@ -80,9 +80,23 @@ falconz/
 
 ---
 
-## ☁️ Deployment (Render)
+## ☁️ Deployment
 
-FalconZ V1 is fully prepared for cloud deployment on [Render](https://render.com).
+FalconZ V1 is fully prepared for cloud deployment on platforms like [Render](https://render.com) and [Vercel](https://vercel.com).
+
+### Vercel Deployment Guide (Recommended)
+
+1. Log into your [Vercel Dashboard](https://vercel.com/dashboard).
+2. Click **Add New...** and select **Project**.
+3. Import your GitHub repository (`Falconz-version1`).
+4. Vercel will automatically detect the `vercel.json` file.
+5. Expand the **Environment Variables** section.
+6. Add the following secret variable:
+   - **Key:** `GEMINI_API_KEY`
+   - **Value:** `<Your Google Gemini API Key>`
+7. Click **Deploy**.
+
+Vercel will use `@vercel/python` to build and serve the Flask backend serverlessly.
 
 ### Render Deployment Guide
 
