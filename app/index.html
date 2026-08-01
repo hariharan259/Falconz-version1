@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FalconZ - Drone Engineering Intelligence Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/components.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div id="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>FALCONZ <span class="badge">V1</span></h2>
+                <p class="tagline">Engineering Intelligence</p>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="/" class="nav-link" data-route="/">Dashboard</a></li>
+                    <li><a href="/drones" class="nav-link" data-route="/drones">Drones</a></li>
+                    <li><a href="/falcon-ai" class="nav-link" data-route="/falcon-ai">Falcon AI</a></li>
+                    <li><a href="/flight-logs" class="nav-link" data-route="/flight-logs">Flight Logs</a></li>
+                    <li><a href="/calibration" class="nav-link" data-route="/calibration">Calibration</a></li>
+                    <li><a href="/pid-tuning" class="nav-link" data-route="/pid-tuning">PID Tuning</a></li>
+                    <li><a href="/gps-telemetry" class="nav-link" data-route="/gps-telemetry">GPS & Telemetry</a></li>
+                    <li><a href="/environmental-mission" class="nav-link" data-route="/environmental-mission">Environmental Mission</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="status-indicator">
+                    <span class="status-dot connected"></span>
+                    <span class="status-text">System Online</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <header class="topbar">
+                <div class="topbar-left">
+                    <h1 id="page-title">Dashboard</h1>
+                </div>
+                <div class="topbar-right">
+                    <div id="active-drone-selector" class="drone-selector">
+                        <span>Active Drone:</span>
+                        <select id="drone-select">
+                            <option value="">No drone configured</option>
+                        </select>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dynamic View Container -->
+            <div id="view-container">
+                <!-- Views are injected here by router.js -->
+            </div>
+        </main>
+    </div>
+
+    <script type="module" src="/js/app.js"></script>
+</body>
+</html>

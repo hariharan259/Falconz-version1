@@ -1,0 +1,8 @@
+{
+  "reply": "OBSERVED:\n- Mission Name: Test Lake Inspection\n- Mission Status: ACTIVE\n- Water Sample: WS-001 (Status: COLLECTED)\n\nINFERENCE:\n- The environmental inspection mission is currently active and has successfully completed an initial water sample collection.\n\nUNKNOWN:\n- Chemical/biological laboratory test results for Water Sample WS-001.\n- Environmental sensor readings (sensor telemetry array is empty).\n- Camera status and captured visual data (camera field is empty).\n- Visual field observations (observations array is empty).\n\nMISSION DATA:\n- Mission Name: Test Lake Inspection\n- Mission Status: ACTIVE\n- Water Samples: Sample ID WS-001 (Status: COLLECTED)\n- Sensors: None recorded\n- Camera: No status reported\n- Observations: None recorded\n\nRECOMMENDED CHECKS:\n- Submit Water Sample WS-001 to an accredited laboratory for formal sample analysis.\n- Verify environmental sensor and camera connections/payload status prior to the next flight segment.\n\nSAFETY:\n- Sample collection status must never be interpreted as proof of water safety or contamination status until certified laboratory test results are received.\n\nSources:\n- Environmental Mission Log\n- Inference",
+  "sources": [
+    "FalconZ Deterministic Engine",
+    "Gemini AI"
+  ],
+  "success": true
+}
