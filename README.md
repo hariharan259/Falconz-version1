@@ -6,6 +6,9 @@ FalconZ V1 is a professional engineering toolchain designed to help drone engine
 
 ---
 
+## 🌍 Live Demo
+**[Launch FalconZ V1](https://falconz-version1.vercel.app/)** *(Replace with your exact Vercel/Render URL if different)*
+
 ## 🚀 Project Overview
 
 FalconZ is built on the philosophy that AI should assist engineers, not replace engineering math. The core calculations (Thrust-to-Weight ratios, Hover Throttle, Battery Discharge limits, etc.) are purely deterministic. The AI (Falcon AI) provides contextual inference based solely on the active drone configuration and real flight-log data, with strict guardrails preventing hallucinated parameters.
