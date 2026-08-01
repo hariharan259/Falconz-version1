@@ -4,46 +4,61 @@
 
 FalconZ V1 is a professional engineering toolchain designed to help drone engineers architect custom multirotors, diagnose flight-log telemetry, configure PID loops, and manage ecological inspection workflows through a deterministic software layer augmented by a large language model (Gemini).
 
-## 🚀 Features
+---
 
-- **Command Center Dashboard:** Unified view tracking TWR, Health Scores, PID status, and Environmental payloads simultaneously.
-- **Deterministic Engineering Engine:** Instantly calculates AUW, Max Thrust, TWR, Hover Throttle, Battery Discharge limits, and ESC Margins.
-- **Drone Manager:** Maintains an offline-first storage array (`localStorage`) for managing multiple drone profiles simultaneously.
-- **Advanced Flight Diagnostics:** Native ArduPilot `.BIN` log parser. Flags RC/GPS drops, visualizes Battery/Vibration, and generates an algorithmic 0-100 Health Score.
-- **PID Tuning Engine:** Custom interface for configuring Roll, Pitch, and Yaw matrices with native presets and Flight-Log vibration warnings.
-- **GPS & Telemetry Tracker:** Offline map/radar projection simulating Live/Simulated telemetry coordinates and hardware health.
-- **Environmental Mission Workflow:** Architecture for logging UNO Q integration, MQ-135 sensor events, and a manual Water Sampling (PLANNED -> COLLECTED -> LAB) chain.
-- **Falcon AI (Powered by Gemini):** A contextual AI assistant that natively inherits the active drone’s exact configuration and flight logs before answering. Built with strict **Source Attribution** limits to prevent AI hallucination over mathematical bounds.
-- **Engineering Knowledge Base:** Grounded internal RAG (Retrieval-Augmented Generation) ensuring Gemini leverages validated drone theory rather than general web knowledge.
+## 🚀 Project Overview
+
+FalconZ is built on the philosophy that AI should assist engineers, not replace engineering math. The core calculations (Thrust-to-Weight ratios, Hover Throttle, Battery Discharge limits, etc.) are purely deterministic. The AI (Falcon AI) provides contextual inference based solely on the active drone configuration and real flight-log data, with strict guardrails preventing hallucinated parameters.
+
+## ✨ Features
+
+- **Command Center Dashboard:** Unified overview tracking configuration completeness, hardware statuses, and environmental payload states.
+- **Drone Manager:** Offline-first architecture (`localStorage`) capable of persisting multiple custom airframes locally without requiring a cloud database.
+- **Deterministic Engineering Engine:** Derives dynamic outputs like AUW, Max Thrust, TWR, Hover Throttle, Battery Limits, and ESC Margins.
+- **Flight Log Analyzer:** Fully native ArduPilot `.BIN` parser. Exposes real flight telemetry, calculates 0-100 algorithmic Health Scores, and visualizes Battery/Vibration graphs.
+- **Falcon AI (Powered by Gemini):** Specialized generative AI deeply integrated into the state manager. Provides context-aware inferences based strictly on `[OBSERVED]`, `[CALCULATED]`, or `[USER PROVIDED]` sources.
+- **Calibration & PID Tuning:** Custom arrays simulating real-world configuration matrices with preset locks.
+- **GPS & Telemetry Tracker:** Offline map/radar simulating Live/Simulated telemetry coordinates.
+- **Environmental Mission Workflow:** Orchestrates UNO Q payloads, MQ-135 sensors, Network Camera streaming (RTSP/HTTP), and sequential Water Sampling workflows.
+- **Knowledge Base (RAG):** In-built contextual documentation grounded exclusively on factual aerodynamic/drone engineering theories.
 
 ---
 
-## 🏗 Architecture & Technology Stack
+## 📁 Folder Structure
 
-**Frontend:**
-- Vanilla JavaScript (ES6 Modules)
-- Single Page Application (SPA) Router with HTML5 History API
-- Pure CSS (No Tailwind/Bootstrap) for a clean, deterministic engineering aesthetic
-- `localStorage` JSON abstraction layer for 100% offline persistence
-- Chart.js for Telemetry/Flight Log visualizations
-
-**Backend:**
-- Python 3.9+
-- Flask (API Gateway & Static File Server)
-- PyMavlink (DFReader for ArduPilot DataFlash logs)
-- Google GenAI SDK (Gemini Flash integration)
+```
+falconz/
+├── app/
+│   ├── css/                # Custom cascading stylesheets (No frameworks)
+│   ├── js/
+│   │   ├── app.js          # Main entry & router orchestrator
+│   │   ├── router.js       # SPA Route Handler
+│   │   ├── store.js        # Global State / localStorage abstraction
+│   │   ├── components/     # Reusable DOM components
+│   │   ├── services/       # Engineering, GPS, Telemetry, Environment engines
+│   │   └── views/          # Module Views (Dashboard, Drones, AI, PID, etc.)
+│   └── index.html          # Unified SPA entry point
+├── backend/                # Flask Blueprints for API extensions
+├── knowledge/              # Grounded engineering documentation for RAG
+├── .env                    # Secure Environment Variables (ignored by Git)
+├── .gitignore              # Ignored files
+├── flight_log_parser.py    # PyMavlink `.BIN` decoding script
+├── render.yaml             # Render deployment configuration (Blueprint)
+├── requirements.txt        # Python dependencies
+└── server.py               # Flask application & API Gateway
+```
 
 ---
 
-## 🛠 Installation & Setup
+## ⚙️ Installation & Running Locally
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/your-org/falconz.git
-   cd falconz
+   git clone https://github.com/your-username/Falconz-version1.git
+   cd Falconz-version1
    ```
 
-2. **Set up Python Virtual Environment:**
+2. **Set up Virtual Environment:**
    ```bash
    python3 -m venv .venv
    source .venv/bin/activate
@@ -54,8 +69,8 @@ FalconZ V1 is a professional engineering toolchain designed to help drone engine
    ```bash
    cp .env.example .env
    ```
-   Open `.env` and insert your Gemini API Key:
-   `GEMINI_API_KEY="your-api-key-here"`
+   Open `.env` and add your API Key:
+   `GEMINI_API_KEY="your-actual-api-key"`
 
 4. **Run the Server:**
    ```bash
@@ -65,28 +80,44 @@ FalconZ V1 is a professional engineering toolchain designed to help drone engine
 
 ---
 
-## ⚠️ Safety & UNKNOWN Handling
+## ☁️ Deployment (Render)
 
-FalconZ operates under strict "No-Fabrication" engineering rules:
-- **No default values:** If a parameter is missing, the system aggressively displays `UNKNOWN` rather than defaulting to `0` or `false`.
-- **Hardware abstraction:** Simulated Telemetry and Hardware statuses are explicitly badged as `SIMULATED` or `READY FOR INTEGRATION`.
-- **Data safety:** FalconZ clearly delineates between a raw MQ sensor analog reading and a certified lab result.
+FalconZ V1 is fully prepared for cloud deployment on [Render](https://render.com).
+
+### Render Deployment Guide
+
+1. Log into your Render dashboard.
+2. Click **New +** and select **Blueprint**.
+3. Connect your GitHub repository (`Falconz-version1`).
+4. Render will automatically read the `render.yaml` configuration file and detect the Web Service.
+5. In the Render Dashboard, go to your new Web Service -> **Environment**.
+6. Add the following secret variable manually:
+   - **Key:** `GEMINI_API_KEY`
+   - **Value:** `<Your Google Gemini API Key>`
+7. Save and Trigger Deploy.
+
+Render will use `gunicorn server:app` to run the application in a production-ready environment without debug mode.
 
 ---
 
-## 🎮 Hackathon Demo Mode
+## 💻 Technologies Used
 
-If you are evaluating this project at a hackathon, you can bypass the manual drone creation workflow:
-1. Open the **Dashboard**.
-2. Click **Initialize Hackathon Demo**.
-3. A pre-configured `Falcon Quad 01 (DEMO)` will be loaded containing simulated telemetry, calculated thrust loops, and a pre-staged "Lake Water Survey" mission.
+- **Frontend:** Vanilla JavaScript (ES6 Modules), HTML5, CSS3, Chart.js.
+- **Backend:** Python 3.9+, Flask, Gunicorn.
+- **Telemetry Parsing:** PyMavlink (DFReader).
+- **AI Infrastructure:** Google GenAI SDK (Gemini Flash).
 
 ---
 
-## 📖 Known Limitations (V1)
-- **Flight Log Uploads:** True diagnostic scoring requires genuine `.BIN` files; Demo Mode explicitly avoids faking `.BIN` structures.
-- **RTSP Streams:** Browser-native RTSP requires a proxy relay; the current Camera module assumes configuration intent rather than direct playback.
-- **Hardware Polling:** Live MAVLink polling via serial is stubbed as `READY FOR INTEGRATION`.
+## 🖼 Screenshots Placeholder
+*(Add images of the Command Center, Flight Log Analyzer, and Falcon AI here).*
 
-## License
+---
+
+## 🔮 Future Scope
+- Live Serial/MAVLink hardware connections (WebSerial API).
+- Cloud synchronization (PostgreSQL backend replacing localStorage).
+- Live RTSP streaming multiplexing over WebRTC.
+
+## 📄 License
 MIT License

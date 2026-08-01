@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: falconz-v1
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn server:app
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.9.6
+      - key: GEMINI_API_KEY
+        sync: false
